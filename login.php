@@ -8,10 +8,35 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="server.php">
-        <input type="text" name="username"><br/>
-        <input type="password" name="pwd"><br/>
-        <input type="submit">
-    </form>
+    <?php
+        $flag = true;
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $name = $_POST['username'];
+            $p = $_POST['pwd'];
+            if($name == "123" && $p == "456"){
+                $flag = false;
+            }else{
+                $flag = true;
+            }
+        }
+    ?>
+    <?php
+        if($flag) {
+    ?>
+        <form action="login.php" method="post">
+            <input type="text" name="username"><br/>
+            <input type="password" name="pwd"><br/>
+            <input type="submit" value="登录">
+        </form>
+        <?php
+            if($_SERVER["REQUEST_METHOD"] == "POST"){
+                echo "登录失败";
+            }
+        ?>
+    <?php
+        }else{
+            echo "恭喜登录成功";
+        }
+    ?>
 </body>
 </html>
